@@ -29,13 +29,20 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
+      - name: Install dependencies and build
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: npm run build
+        run: |
+          # Automatically detect folder with package.json
+          PKG_DIR=$(dirname $(find . -maxdepth 2 -name "package.json" | head -n 1))
+          echo "Found project in: $PKG_DIR"
+          cd "$PKG_DIR"
+          npm install
+          npm run build
+          if [ "$PKG_DIR" != "." ]; then
+            mkdir -p ../dist
+            cp -r dist/* ../dist/
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
