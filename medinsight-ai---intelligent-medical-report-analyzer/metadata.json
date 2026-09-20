@@ -1,0 +1,6 @@
+{
+  "name": "MedInsight AI - Intelligent Medical Report Analyzer",
+  "description": "Enterprise-grade medical report analyzer that extracts clinical lab parameters, compares against normal reference ranges, and provides plain-language insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
