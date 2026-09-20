@@ -33,11 +33,10 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          # Automatically detect folder with package.json
           PKG_DIR=$(dirname $(find . -maxdepth 2 -name "package.json" | head -n 1))
           echo "Found project in: $PKG_DIR"
           cd "$PKG_DIR"
-          npm install
+          npm install --legacy-peer-deps
           npm run build
           if [ "$PKG_DIR" != "." ]; then
             mkdir -p ../dist
